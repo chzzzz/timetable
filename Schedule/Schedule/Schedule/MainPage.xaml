@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Schedule"
+             x:Class="Schedule.MainPage"
+             Title="课程助手" >
+
+    <StackLayout>
+        <!-- Place new controls here -->
+        <Button Text="课程表"
+                Clicked="ScheduleOnCall" />
+        <Button Text="成绩清单"
+                Clicked="ScoresOnCall" />
+    </StackLayout>
+
+</ContentPage>
