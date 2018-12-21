@@ -16,6 +16,7 @@ namespace WindowsFormsApp1
     class Service
     {
         private CookieContainer container;
+        //private List<Lesson> Lessons =new List<Lesson>();
         Image loadImage()
         {
             String url = "http://210.42.121.241/servlet/GenImg";
@@ -63,12 +64,15 @@ namespace WindowsFormsApp1
             //接收输出数据
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             string strWebData = string.Empty;
-            Encoding encoding =Encoding.GetEncoding( response.CharacterSet);
-            using (StreamReader reader = new StreamReader(response.GetResponseStream(),encoding))
+            Encoding encoding = Encoding.GetEncoding(response.CharacterSet);
+            using (StreamReader reader = new StreamReader(response.GetResponseStream(), encoding))
             {
                 strWebData = reader.ReadToEnd();
             }
-            return true;
+            if (request.Timeout == 200)
+                return false;
+            else
+                return true;
         }
         string getToken(string webData)
         {
@@ -109,8 +113,122 @@ namespace WindowsFormsApp1
                 + "&learnType=" + leanType
                 + "&scoreFlag=" + scoreFlag
                 + "&t=");
-            return"";
+            return "";
         }
+        public string[] getInfo(string a)//返回一个课程表数组
+        {
 
+            string[] classtable = new string[25];
+            // Regex spaceReg = new Regex("\\s{2,}|\\ \\;", RegexOptions.Compiled | RegexOptions.IgnoreCase);//把一个以上的空格替换为一个空格
+            int i = 0, j = 0;
+            string pattern = "var lessonName = \".+\".+[\\s\\S]+?var day = \".+\".+[\\s\\S]+?var note .+";
+            Regex rx = new Regex(pattern);
+            Match m = rx.Match(a);
+            while (m.Success)
+            {
+                classtable[i] = m.Value;
+                i++;
+                m = rx.Match(a, m.Index + m.Length);
+
+            }
+            while (j < 25)
+            {
+
+                try
+                {
+                    classtable[j] = classtable[j].Replace("=", "").Replace("\"", "").Replace(";", " ").Replace("var", "");//去掉等于号和引号
+                    classtable[j] = classtable[j].Replace("lessonName", "").Replace("day", "").Replace("beginWeek", "");
+                    classtable[j] = classtable[j].Replace("endWeek", "").Replace("beginTime", "").Replace("endTime", "");
+                    classtable[j] = classtable[j].Replace("classRoom", "").Replace("teacherName", "").Replace("professionName", "");
+                    classtable[j] = classtable[j].Replace("planType", "").Replace("credit", "").Replace("areaName", "").Replace("weekInterVal", "");
+
+                }
+                catch (Exception e)
+                {
+
+                }
+                StreamWriter sw = new StreamWriter("class.txt", true, Encoding.UTF8);
+                sw.WriteLine(classtable[j]);
+                sw.Close();
+                //定义一个变量用来存读到的东西
+                string text = "";
+                //用一个读出流去读里面的数据           
+                using (StreamReader reader2 = new StreamReader(@"D:\class.txt", Encoding.Default))
+                {
+                    //读一行
+                    string line = reader2.ReadLine();
+                    while (line != null)
+                    {
+                        //如果这一行里面有weekDay或者grade等等这几个字符，就不加入到text中，如果没有就加入
+                        if (line.IndexOf("weekDay") >= 0 || line.IndexOf("grade") >= 0 || line.IndexOf("detail") >= 0
+                            || line.IndexOf("note") >= 0 || line.IndexOf(" academicTeach") >= 0
+                            || line.IndexOf("classNote") >= 0 || line.IndexOf("//隔几周") >= 0)
+                        { }
+                        else
+                        {
+                            text += line + "\r\n";
+                        }
+                        //一行一行读
+                        line = reader2.ReadLine();
+                    }
+
+                }
+                classtable[j] = text;  //改变字符串中的信息，即删除不需要的行
+                                       // Console.WriteLine(classtable[j]);
+                File.Delete("class.txt");
+                j++;
+            }
+            return classtable;
+        }
+        //public void Match(string[] temp)//参数为课程表数组
+        //{
+
+        //    foreach (string c in temp)
+        //    {
+        //        Lesson newLesson = new Lesson();
+        //        string[] t = new string[30];//临时存储单个课程的各项信息
+        //        string pattern = " .*? ";
+        //        Regex rx = new Regex(pattern);
+        //        Match m = rx.Match(c);
+        //        int i = 0;
+        //        while (m.Success)
+        //        {
+        //            t[i] = m.Value;
+        //            i++;
+        //            m = rx.Match(c, m.Index + m.Length);
+        //        }
+        //        newLesson.LessonName = t[1];
+        //        newLesson.Day = t[3];
+        //        newLesson.BeginWeek = t[5];
+        //        newLesson.EndWeek = t[7];
+        //        newLesson.BeginTime = t[9];
+        //        newLesson.EndTime = t[11];
+        //        newLesson.ClassRoom = t[13];
+        //        newLesson.TeacherName = t[15];
+        //        newLesson.ProfessionName = t[17];
+        //        newLesson.PlanType = t[19];
+        //        newLesson.Credit = t[21];
+        //        newLesson.AreaName = t[23];
+        //        newLesson.WeekInterval = t[25];
+        //        Lessons.Add(newLesson);
+        //    }
+        //}
+        public void serializeMethod(List<Lesson> list)
+        {
+            using (FileStream fs = new FileStream("s.xml", FileMode.Create))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(fs, list);
+            }
+        }
+        public List<Lesson> reserializeMethod(string fileName)
+        {
+            using (FileStream fs = new FileStream(fileName, FileMode.Open))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                List<Lesson> list = (List<Lesson>)bf.Deserialize(fs);
+                return list;
+            }
+        }
     }
 }
