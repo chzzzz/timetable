@@ -11,12 +11,16 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            StreamReader reader = new StreamReader("D:\\classtable.txt", Encoding.Default);
-            string a = reader.ReadToEnd();
+          StreamReader reader = new StreamReader("D:\\classtable2.txt", Encoding.Default);
+           string a = reader.ReadToEnd();
             GetInformation b = new GetInformation();//获取课程信息的对象
-            string[] temp = b.Get(a);//保存一个学生所有课程的数组
+           string[] temp = b.Get(a);//保存一个学生所有课程的数组
             LessonList c = new LessonList();
             c.Match(temp);
+            ImoptAndExport fun = new ImoptAndExport();
+             fun.ImportToXml(c.lessonList);
+            fun.ExportFromXml(fun);
+            c.lessonList = fun.temp;
                
         }      
 

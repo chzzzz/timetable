@@ -68,7 +68,7 @@ namespace Test
 
                 }
                 classtable[j] = text;  //改变字符串中的信息，即删除不需要的行
-               // Console.WriteLine(classtable[j]);
+                Console.WriteLine(classtable[j]);
                 File.Delete("D:/class.txt");
                 j++;
             }

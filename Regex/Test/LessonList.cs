@@ -7,7 +7,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 namespace Test
 {
-    class LessonList
+    public class LessonList
     {
         public List<Lesson> lessonList= new List<Lesson>();
         public void Match(string []temp)//参数为课程表数组
@@ -27,19 +27,24 @@ namespace Test
                     i++;
                     m = rx.Match(c, m.Index + m.Length);
                 }
+               int j = 3;
+               if(t[j]== "  ")
+                {
+                    j = 4;
+                }            
                 newLesson.LessonName = t[1];
-                newLesson.Day = t[3];
-                newLesson.BeginWeek = t[5];
-                newLesson.EndWeek = t[7];
-                newLesson.BeginTime = t[9];
-                newLesson.EndTime = t[11];
-                newLesson.ClassRoom = t[13];
-                newLesson.TeacherName = t[15];
-                newLesson.ProfessionName = t[17];
-                newLesson.PlanType = t[19];
-                newLesson.Credit = t[21];
-                newLesson.AreaName = t[23];
-                newLesson.WeekInterval = t[25];
+                newLesson.Day = t[j];
+                newLesson.BeginWeek = t[j+2];
+                newLesson.EndWeek = t[j+4];
+                newLesson.BeginTime = t[j+6];
+                newLesson.EndTime = t[j+8];
+                newLesson.ClassRoom = t[j+10];
+                newLesson.TeacherName = t[j+12];
+                newLesson.ProfessionName = t[j+14];
+                newLesson.PlanType = t[j+16];
+                newLesson.Credit = t[j+18];
+                newLesson.AreaName = t[j+20];
+                newLesson.WeekInterval = t[j+22];
                 lessonList.Add(newLesson);
             }
         }

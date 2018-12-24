@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Test
 {
-    class Lesson
+   public class Lesson
     {
         public string LessonName { get; set; }
         public string Day { get; set; }

@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GetInformation.cs" />
+    <Compile Include="ImoptAndExport.cs" />
     <Compile Include="Lesson.cs" />
     <Compile Include="LessonList.cs" />
     <Compile Include="Program.cs" />
