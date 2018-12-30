@@ -6,12 +6,12 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="学号：" />
-            <Entry />
+            <Entry x:Name="iD" Keyboard="Numeric"/>
             <Label Text="教务系统密码：" />
-            <Entry />
+            <Entry x:Name="passWord"  Keyboard="Numeric" IsPassword="True" />
             <Label Text="验证码：" />
-            <Entry />
-            <Image />
+            <Image  x:Name="pId" Source= "{Binding ISource}" Scale="4" />
+            <Entry x:Name="key"/>
             <Button Text="登录" Clicked="LoginOnCall" />
         </StackLayout>
     </ContentPage.Content>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Schedule.ScoreDetail">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="{Binding No}" FontSize="Medium" />
+            <Label Text="{Binding Name}" FontSize="Large" />
+            <Label Text="老师:"/>
+            <Label Text="{Binding TeacherName}" FontSize="Medium"/>
+            <Label Text="学分:"/>
+            <Label Text="{Binding Credit}" FontSize="Medium"/>
+            <Label Text="成绩:"/>
+            <Label Text="{Binding Grade}" FontSize="Medium"/>
+            <Label Text="年份:"/>
+            <Label Text="{Binding Year} " FontSize="Medium"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

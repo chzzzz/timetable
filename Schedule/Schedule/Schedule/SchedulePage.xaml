@@ -11,10 +11,10 @@
             <Setter Property="HorizontalOptions" Value="Center" />
         </Style>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
         <StackLayout>
-            <Grid>
+            <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -23,10 +23,13 @@
                     <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
                 <Button Grid.Row="0" Grid.Column="0" Text="更新" Clicked="RenewOnCall" />
-                <Picker Grid.Row="0" Grid.Column="1" Title="更换当前周" />
+                <Picker Grid.Row="0" Grid.Column="1" Title="更换当前周"
+                       x:Name="picker"  ItemsSource="{Binding Weeks}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedIndexChanged="Picker_SelectedIndexChanged"/>
             </Grid>
             <ScrollView>
-                <Grid ColumnSpacing="1" RowSpacing="1">
+                <Grid ColumnSpacing="1" RowSpacing="1" x:Name="grid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
@@ -52,29 +55,6 @@
                         <RowDefinition Height="40" />
                         <RowDefinition Height="40" />
                     </Grid.RowDefinitions>
-                    <BoxView Color="#eee9cd" Grid.Row="0" Grid.ColumnSpan="8" />
-                    <BoxView Color="#eee9cd" Grid.Column="0" Grid.RowSpan="14" />
-                    <Label Text="第 周" Grid.Row="0" Grid.Column="0" Style="{StaticResource GridHeader}" />
-                    <Label Text="周日" Grid.Row="0" Grid.Column="1" Style="{StaticResource GridHeader}" />
-                    <Label Text="周一" Grid.Row="0" Grid.Column="2" Style="{StaticResource GridHeader}" />
-                    <Label Text="周二" Grid.Row="0" Grid.Column="3" Style="{StaticResource GridHeader}" />
-                    <Label Text="周三" Grid.Row="0" Grid.Column="4" Style="{StaticResource GridHeader}" />
-                    <Label Text="周四" Grid.Row="0" Grid.Column="5" Style="{StaticResource GridHeader}" />
-                    <Label Text="周五" Grid.Row="0" Grid.Column="6" Style="{StaticResource GridHeader}" />
-                    <Label Text="周六" Grid.Row="0" Grid.Column="7" Style="{StaticResource GridHeader}" />
-                    <Label Text="1" Grid.Row="1" Grid.Column="0" Style="{StaticResource GridHeader}" />
-                    <Label Text="2" Grid.Row="2" Grid.Column="0" Style="{StaticResource GridHeader}" />
-                    <Label Text="3" Grid.Row="3" Grid.Column="0" Style="{StaticResource GridHeader}" />
-                    <Label Text="4" Grid.Row="4" Grid.Column="0" Style="{StaticResource GridHeader}" />
-                    <Label Text="5" Grid.Row="5" Grid.Column="0" Style="{StaticResource GridHeader}" />
-                    <Label Text="6" Grid.Row="6" Grid.Column="0" Style="{StaticResource GridHeader}" />
-                    <Label Text="7" Grid.Row="7" Grid.Column="0" Style="{StaticResource GridHeader}" />
-                    <Label Text="8" Grid.Row="8" Grid.Column="0" Style="{StaticResource GridHeader}" />
-                    <Label Text="9" Grid.Row="9" Grid.Column="0" Style="{StaticResource GridHeader}" />
-                    <Label Text="10" Grid.Row="10" Grid.Column="0" Style="{StaticResource GridHeader}" />
-                    <Label Text="11" Grid.Row="11" Grid.Column="0" Style="{StaticResource GridHeader}" />
-                    <Label Text="12" Grid.Row="12" Grid.Column="0" Style="{StaticResource GridHeader}" />
-                    <Label Text="13" Grid.Row="13" Grid.Column="0" Style="{StaticResource GridHeader}" />
                 </Grid>
             </ScrollView>
         </StackLayout>

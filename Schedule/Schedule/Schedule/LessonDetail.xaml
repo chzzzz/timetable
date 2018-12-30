@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Schedule.LessonDetail">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="课程名:"/>
+                <Label Text="{Binding LessonName}" FontSize="Large" />
+                <Label Text="老师:"/>
+                <Label Text="{Binding TeacherName}" FontSize="Medium"/>
+                <Label Text="地点:"/>
+                <Label Text="{Binding AreaName}" FontSize="Medium"/>
+                <Label Text="开始周:"/>
+                <Label Text="{Binding BeginWeek}" FontSize="Medium"/>
+                <Label Text="结束周:"/>
+                <Label Text="{Binding EndWeek} " FontSize="Medium"/>
+                <Label Text="开始节:"/>
+                <Label Text="{Binding EndTime} " FontSize="Medium"/>
+                <Label Text="结束节:"/>
+                <Label Text="{Binding EndTime} " FontSize="Medium"/>
+                <Label Text="星期:"/>
+                <Label Text="{Binding Day} " FontSize="Medium"/>
+                <Label Text="学分:"/>
+                <Label Text="{Binding Credit} " FontSize="Medium"/>
+                <Label Text="频次:"/>
+                <Label Text="{Binding WeekInterval} " FontSize="Medium"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
+<!--public string LessonName { get; set; }
+        public string Day { get; set; }
+        public string BeginWeek { get; set; }
+        public string EndWeek { get; set; }
+        public string BeginTime { get; set; }
+        public string EndTime { get; set; }
+        public string AreaName { get; set; }
+        public string PlanType { get; set; }
+        public string ClassRoom { get; set; }
+        public string WeekInterval { get; set; }
+        public string TeacherName { get; set; }
+        public string ProfessionName { get; set; }
+        public string Credit { get; set; }-->

@@ -6,9 +6,22 @@
     <ContentPage.Content>
         <StackLayout>
             <Button Text="更新" Clicked="RenewOnCall"/>
-            <ScrollView>
-                
-            </ScrollView>
+            <Label Text="已出成绩得课程"/>
+            <ListView x:Name="listView"  >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding No}" FontSize="Micro" />
+                                <Label Text="{Binding Name}" FontSize="Small" />
+                                <Label Text="{Binding TeacherName}" FontSize="Micro"/>
+                                <Label Text="{Binding Credit}" FontSize="Micro"/>
+                                <Label Text="{Binding Grade}" FontSize="Micro"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
